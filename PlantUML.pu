@@ -1,0 +1,44 @@
+@startuml
+class Usuario {
+    - id: int
+    - nombre: string
+    - listaLibrosReservados: List<Libro>
+    + reservarLibro(libro: Libro): void
+    + dejarReseña(libro: Libro, reseña: Reseña): void
+}
+class Libro {
+    - id: int
+    - titulo: string
+    - autor: Autor
+    - listaCategorias: List<Categoria>
+    - listaReseñas: List<Reseña>
+    + agregarReseña(resenia: Reseña): void
+}
+class Reseña {
+    - id: int
+    - usuario: Usuario
+    - libro: Libro
+    - contenido: string
+}
+class Autor {
+    - id: int
+    - nombre: string
+    - listaLibros: List<Libro>
+}
+class Categoria {
+    - id: int
+    - nombre: string
+    - listaLibros: List<Libro>
+}
+class LibroCategoria {
+    - id: int
+    - libro: Libro
+    - categoria: Categoria
+}
+Usuario "1" -- "*" Libro : tiene
+Usuario "1" -- "*" Reseña : deja
+Libro "1" -- "*" Reseña : tiene
+Libro "*" -- "1" Autor : pertenece_a
+LibroCategoria "1" -- "1" Libro : contiene
+LibroCategoria "1" -- "1" Categoria : pertenece_a
+@enduml
